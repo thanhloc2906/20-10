@@ -26,7 +26,7 @@
             width: 100%;
         }
 
-        /* ----- Hộp quà (Điều chỉnh kích thước) ----- */
+        /* ----- Hộp quà ----- */
         .gift-box {
             position: relative;
             display: flex;
@@ -45,7 +45,6 @@
             position: absolute;
             top: 0;
             left: 50%;
-            /* THAY ĐỔI: Dịch nắp hộp lên 1 chút (translateY(-20px)) khi đóng */
             transform: translateX(-50%) translateY(-20px); 
             width: 100%; 
             height: 100px;
@@ -72,9 +71,7 @@
             z-index: 1;
         }
         
-        /* ----- Hộp quà (Trạng thái 2: Mở) ----- */
         .gift-box.open .gift-lid {
-            /* THAY ĐỔI: Điều chỉnh vị trí mở hộp để hợp với vị trí đóng mới */
             transform: translateX(-50%) translateY(-240px) rotate(-25deg); 
         }
 
@@ -91,6 +88,8 @@
             width: 100%;
             z-index: 10;
             pointer-events: none;
+            /* THAY ĐỔI: Thêm padding-bottom để tạo khoảng trống cho các nút bên dưới */
+            padding-bottom: 120px; /* Tùy chỉnh nếu cần thêm/bớt khoảng trống */
         }
 
         .gift-box.open .content-cat {
@@ -102,30 +101,34 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px; /* Khoảng cách giữa ảnh mèo và lời chúc */
         }
 
         .message-1 {
-            margin-top: 15px;
+            margin-top: 0; /* Đã có margin-bottom từ cat-image */
             font-size: 1.6em;
-            color: #d84343;
+            /* THAY ĐỔI: Màu chữ dễ thấy hơn */
+            color: white; /* Màu trắng */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Thêm đổ bóng để dễ đọc trên mọi nền */
             font-weight: bold;
             animation: pulse 1.5s infinite;
         }
 
-        /* ----- Nút tương tác (FIX THỜI GIAN HIỆN) ----- */
-        .button-group-1, .button-group-2 {
+        /* ----- Nút tương tác (Di chuyển vị trí và đổi màu) ----- */
+        .button-group-1 {
             margin-top: 20px;
             opacity: 0;
-            /* THAY ĐỔI: Giảm thời gian chờ xuống 1s để hiện nhanh hơn */
             transition: opacity 0.5s ease 1s; 
+            /* THAY ĐỔI: Đặt vị trí các nút ngay dưới hộp quà/ảnh mèo */
             position: absolute;
-            bottom: -150px; 
+            bottom: -15px; /* Vị trí mới, điều chỉnh nếu cần */
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
             display: flex;
             justify-content: center;
             gap: 20px;
+            z-index: 11; /* Đảm bảo các nút nổi lên trên */
             pointer-events: none;
         }
         
@@ -144,14 +147,17 @@
             transition: transform 0.2s, background-color 0.2s;
         }
 
+        /* THAY ĐỔI: Màu nút dễ thấy hơn */
         .btn-primary {
-            background-color: #ff6f00;
+            background-color: #28a745; /* Xanh lá cây */
             color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         .btn-secondary {
-            background-color: #fdd835;
-            color: #333;
+            background-color: #ffc107; /* Vàng */
+            color: #333; /* Chữ đen hoặc đậm hơn */
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
         }
 
         button:hover {
@@ -247,7 +253,7 @@
 
                 <button id="open-gift-btn" class="start-button">Mở Quà</button>
             </div>
-
+            
             <div class="button-group-1" id="button-group-1">
                 <button class="btn-secondary" onclick="showVideoStage()">CÒN GÌ NỮA KHÔNG?</button> 
                 <button class="btn-primary" onclick="showLetterStage()">TIẾP TỤC</button>
@@ -289,7 +295,7 @@
     </div>
     
     <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn" id="thank-you-btn">
-        Cảm ơn người tặng 😊
+        camon ng lam
     </a>
 
     <script>
@@ -297,7 +303,7 @@
         
         const openGiftBtn = document.getElementById('open-gift-btn');
         const giftBox = document.getElementById('gift-box');
-        const thankYouBtn = document.getElementById('thank-you-btn');
+        const thankYouBtn = document.getElementById('thank-you-btn'); 
         
         const stage1 = document.getElementById('stage-1');
         const stage2 = document.getElementById('stage-2');
@@ -331,7 +337,6 @@
             stage3.style.display = 'flex';
             document.body.style.backgroundColor = '#fbe9e7';
             
-            // Kích hoạt hiệu ứng hiện chữ dần dần
             stageLetter.classList.add('revealed');
         }
         
