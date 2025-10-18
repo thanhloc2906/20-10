@@ -16,7 +16,7 @@
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             transition: background-color 0.5s;
-            position: relative; /* Để các phần tử fixed/absolute căn theo body */
+            position: relative;
         }
 
         .container {
@@ -35,22 +35,22 @@
             margin-top: 50px;
         }
 
-        /* Thêm wrapper để dễ dàng điều chỉnh kích thước tổng thể */
         .gift-wrapper {
             position: relative;
-            width: 320px; /* Kích thước hộp quà MỚI */
-            height: 270px; /* Tổng chiều cao của hộp quà khi đóng */
+            width: 320px; 
+            height: 270px;
         }
 
         .gift-lid {
             position: absolute;
             top: 0;
             left: 50%;
-            transform: translateX(-50%);
+            /* THAY ĐỔI: Dịch nắp hộp lên 1 chút (translateY(-20px)) khi đóng */
+            transform: translateX(-50%) translateY(-20px); 
             width: 100%; 
-            height: 100px; /* Chiều cao nắp hộp - ĐÃ TĂNG */
+            height: 100px;
             background-image: url('assets/naphop.png');
-            background-size: 100% 100%; /* Kéo dãn ảnh phủ kín */
+            background-size: 100% 100%;
             background-repeat: no-repeat;
             background-position: center;
             z-index: 2;
@@ -64,9 +64,9 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            height: 200px; /* Chiều cao thân hộp - ĐÃ TĂNG */
+            height: 200px; 
             background-image: url('assets/thanhop.png');
-            background-size: 100% 100%; /* Kéo dãn ảnh phủ kín */
+            background-size: 100% 100%;
             background-repeat: no-repeat;
             background-position: center;
             z-index: 1;
@@ -74,8 +74,8 @@
         
         /* ----- Hộp quà (Trạng thái 2: Mở) ----- */
         .gift-box.open .gift-lid {
-            /* Điều chỉnh translateY dựa trên kích thước mới */
-            transform: translateX(-50%) translateY(-220px) rotate(-25deg); 
+            /* THAY ĐỔI: Điều chỉnh vị trí mở hộp để hợp với vị trí đóng mới */
+            transform: translateX(-50%) translateY(-240px) rotate(-25deg); 
         }
 
         /* ----- Nội dung bên trong (Mèo + Lời chúc 1) ----- */
@@ -85,21 +85,20 @@
             left: 50%;
             transform: translate(-50%, -50%);
             opacity: 0;
-            transition: opacity 1s ease 1s; /* Hiện chậm sau khi nắp mở */
+            transition: opacity 1s ease 1s; 
             text-align: center;
             max-width: 90%;
             width: 100%;
             z-index: 10;
-            pointer-events: none; /* Không cho click khi chưa hiện */
+            pointer-events: none;
         }
 
         .gift-box.open .content-cat {
             opacity: 1;
-            /* Giữ pointer-events: none ở đây, chỉ kích hoạt trên button-group-1 */
         }
 
         .cat-image {
-            max-width: 280px; /* Tăng kích thước ảnh mèo */
+            max-width: 280px;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -107,31 +106,32 @@
 
         .message-1 {
             margin-top: 15px;
-            font-size: 1.6em; /* Tăng cỡ chữ */
+            font-size: 1.6em;
             color: #d84343;
             font-weight: bold;
             animation: pulse 1.5s infinite;
         }
 
-        /* ----- Nút tương tác (FIX LỖI KHÔNG CLICK ĐƯỢC) ----- */
+        /* ----- Nút tương tác (FIX THỜI GIAN HIỆN) ----- */
         .button-group-1, .button-group-2 {
             margin-top: 20px;
             opacity: 0;
-            transition: opacity 0.5s ease 2s; /* Hiện sau khi nội dung mèo hiện */
+            /* THAY ĐỔI: Giảm thời gian chờ xuống 1s để hiện nhanh hơn */
+            transition: opacity 0.5s ease 1s; 
             position: absolute;
-            bottom: -150px; /* Đẩy xuống để không bị che */
+            bottom: -150px; 
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
             display: flex;
             justify-content: center;
             gap: 20px;
-            pointer-events: none; /* Mặc định KHÔNG cho click */
+            pointer-events: none;
         }
         
         .gift-box.open .button-group-1 {
             opacity: 1;
-            pointer-events: auto; /* CHO PHÉP click khi mở quà */
+            pointer-events: auto;
         }
 
         button {
@@ -165,10 +165,10 @@
             padding: 15px 30px;
             font-size: 1.2em;
             border-radius: 30px;
-            margin-top: 30px; /* Đẩy nút mở quà xuống dưới hộp */
+            margin-top: 30px;
         }
 
-        /* Ẩn các stage */
+        /* Ẩn các stage (Không thay đổi) */
         .stage {
             display: none;
             flex-direction: column;
@@ -181,10 +181,10 @@
         }
         
         .stage-1 {
-            display: flex; /* Màn hình khởi đầu */
+            display: flex;
         }
-        
-        /* Màn hình Video và Lá Thư (Không thay đổi) */
+
+        /* Video và Lá Thư (Không thay đổi) */
         .stage-video { text-align: center; }
         .video-player { max-width: 800px; width: 100%; height: auto; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); border-radius: 10px; }
         .video-title { color: #333; margin-bottom: 20px; }
@@ -201,12 +201,12 @@
             100% { transform: scale(1); }
         }
         
-        /* Nút Cảm ơn cố định (SỬA LẠI HIỆN THỊ) */
+        /* Nút Cảm ơn (Không thay đổi cách hoạt động) */
         .thank-you-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #007bff; /* Messenger Blue */
+            background-color: #007bff;
             color: white;
             padding: 10px 15px;
             border-radius: 20px;
@@ -214,15 +214,13 @@
             text-decoration: none;
             font-weight: bold;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            
-            /* Ẩn mặc định */
             opacity: 0; 
             pointer-events: none;
             transition: opacity 0.5s ease-in-out;
         }
         
         .thank-you-btn.visible {
-            opacity: 1; /* Hiện khi được kích hoạt bằng JS */
+            opacity: 1;
             pointer-events: auto;
         }
 
@@ -237,7 +235,8 @@
     <div id="stage-1" class="stage stage-1">
         <div class="container">
             <div class="gift-box" id="gift-box">
-                <div class="gift-wrapper"> <div class="gift-lid" id="gift-lid"></div>
+                <div class="gift-wrapper">
+                    <div class="gift-lid" id="gift-lid"></div>
                     <div class="gift-body"></div>
 
                     <div class="content-cat" id="content-cat">
@@ -250,7 +249,7 @@
             </div>
 
             <div class="button-group-1" id="button-group-1">
-                <button class="btn-secondary" onclick="showVideoStage()">CÒN GÌ NỮA KHÔNG?</button>
+                <button class="btn-secondary" onclick="showVideoStage()">CÒN GÌ NỮA KHÔNG?</button> 
                 <button class="btn-primary" onclick="showLetterStage()">TIẾP TỤC</button>
             </div>
         </div>
@@ -298,7 +297,7 @@
         
         const openGiftBtn = document.getElementById('open-gift-btn');
         const giftBox = document.getElementById('gift-box');
-        const thankYouBtn = document.getElementById('thank-you-btn'); // Lấy nút Cảm ơn
+        const thankYouBtn = document.getElementById('thank-you-btn');
         
         const stage1 = document.getElementById('stage-1');
         const stage2 = document.getElementById('stage-2');
@@ -309,15 +308,15 @@
         // 1. Mở Hộp Quà
         openGiftBtn.addEventListener('click', () => {
             giftBox.classList.add('open');
-            openGiftBtn.style.display = 'none'; // Ẩn nút "Mở Quà"
+            openGiftBtn.style.display = 'none'; 
             
             // Hiện nút Cảm ơn sau 2.5 giây (để đảm bảo ảnh mèo và nút tương tác đã hiện)
             setTimeout(() => {
-                thankYouBtn.classList.add('visible'); // Kích hoạt nút Cảm ơn
+                thankYouBtn.classList.add('visible'); 
             }, 2500); 
         });
 
-        // 2. Chuyển sang Stage Video
+        // 2. Chuyển sang Stage Video (Khi ấn CÒN GÌ NỮA KHÔNG?)
         function showVideoStage() {
             stage1.style.display = 'none';
             stage2.style.display = 'flex';
@@ -326,12 +325,13 @@
             videoPlayer.play().catch(e => console.log("Video Play Error:", e));
         }
 
-        // 3. Chuyển sang Stage Lá Thư
+        // 3. Chuyển sang Stage Lá Thư (Khi ấn TIẾP TỤC)
         function showLetterStage() {
             stage1.style.display = 'none';
             stage3.style.display = 'flex';
             document.body.style.backgroundColor = '#fbe9e7';
             
+            // Kích hoạt hiệu ứng hiện chữ dần dần
             stageLetter.classList.add('revealed');
         }
         
@@ -346,7 +346,6 @@
             document.body.style.backgroundColor = '#f7f7f7';
 
             stageLetter.classList.remove('revealed');
-            // Nút Cảm ơn vẫn hiện vì hộp quà đã mở.
         }
         
     </script>
