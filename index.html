@@ -16,20 +16,30 @@
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             transition: background-color 0.5s;
+            position: relative; /* Để các phần tử fixed/absolute căn theo body */
         }
 
         .container {
             text-align: center;
             position: relative;
             max-width: 90%;
+            width: 100%;
         }
 
-        /* ----- Hộp quà (Trạng thái 1: Đóng) ----- */
+        /* ----- Hộp quà (Điều chỉnh kích thước) ----- */
         .gift-box {
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 50px;
+        }
+
+        /* Thêm wrapper để dễ dàng điều chỉnh kích thước tổng thể */
+        .gift-wrapper {
+            position: relative;
+            width: 320px; /* Kích thước hộp quà MỚI */
+            height: 270px; /* Tổng chiều cao của hộp quà khi đóng */
         }
 
         .gift-lid {
@@ -37,10 +47,10 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
-            height: 100px; /* Chiều cao nắp hộp */
+            width: 100%; 
+            height: 100px; /* Chiều cao nắp hộp - ĐÃ TĂNG */
             background-image: url('assets/naphop.png');
-            background-size: contain;
+            background-size: 100% 100%; /* Kéo dãn ảnh phủ kín */
             background-repeat: no-repeat;
             background-position: center;
             z-index: 2;
@@ -49,18 +59,23 @@
         }
 
         .gift-body {
-            width: 300px;
-            height: 200px; /* Chiều cao thân hộp */
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 200px; /* Chiều cao thân hộp - ĐÃ TĂNG */
             background-image: url('assets/thanhop.png');
-            background-size: contain;
+            background-size: 100% 100%; /* Kéo dãn ảnh phủ kín */
             background-repeat: no-repeat;
             background-position: center;
-            margin-top: 50px; /* Để thân hộp nằm dưới nắp một chút */
+            z-index: 1;
         }
         
         /* ----- Hộp quà (Trạng thái 2: Mở) ----- */
         .gift-box.open .gift-lid {
-            transform: translateX(-50%) translateY(-150px) rotate(-20deg); /* Mở nghiêng lên */
+            /* Điều chỉnh translateY dựa trên kích thước mới */
+            transform: translateX(-50%) translateY(-220px) rotate(-25deg); 
         }
 
         /* ----- Nội dung bên trong (Mèo + Lời chúc 1) ----- */
@@ -72,16 +87,19 @@
             opacity: 0;
             transition: opacity 1s ease 1s; /* Hiện chậm sau khi nắp mở */
             text-align: center;
-            max-width: 80%;
+            max-width: 90%;
+            width: 100%;
+            z-index: 10;
+            pointer-events: none; /* Không cho click khi chưa hiện */
         }
 
         .gift-box.open .content-cat {
             opacity: 1;
-            z-index: 1;
+            /* Giữ pointer-events: none ở đây, chỉ kích hoạt trên button-group-1 */
         }
 
         .cat-image {
-            max-width: 250px;
+            max-width: 280px; /* Tăng kích thước ảnh mèo */
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -89,29 +107,31 @@
 
         .message-1 {
             margin-top: 15px;
-            font-size: 1.5em;
+            font-size: 1.6em; /* Tăng cỡ chữ */
             color: #d84343;
             font-weight: bold;
             animation: pulse 1.5s infinite;
         }
 
-        /* ----- Nút tương tác ----- */
+        /* ----- Nút tương tác (FIX LỖI KHÔNG CLICK ĐƯỢC) ----- */
         .button-group-1, .button-group-2 {
             margin-top: 20px;
             opacity: 0;
             transition: opacity 0.5s ease 2s; /* Hiện sau khi nội dung mèo hiện */
             position: absolute;
-            bottom: -80px;
+            bottom: -150px; /* Đẩy xuống để không bị che */
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
             display: flex;
             justify-content: center;
             gap: 20px;
+            pointer-events: none; /* Mặc định KHÔNG cho click */
         }
         
         .gift-box.open .button-group-1 {
             opacity: 1;
+            pointer-events: auto; /* CHO PHÉP click khi mở quà */
         }
 
         button {
@@ -145,6 +165,7 @@
             padding: 15px 30px;
             font-size: 1.2em;
             border-radius: 30px;
+            margin-top: 30px; /* Đẩy nút mở quà xuống dưới hộp */
         }
 
         /* Ẩn các stage */
@@ -155,72 +176,23 @@
             justify-content: center;
             min-height: 100vh;
             padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .stage-1 {
             display: flex; /* Màn hình khởi đầu */
         }
         
-        /* ----- Màn hình Video (Stage 2) ----- */
-        .stage-video {
-            text-align: center;
-        }
-
-        .video-player {
-            max-width: 800px;
-            width: 100%;
-            height: auto;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-        }
-
-        .video-title {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        /* ----- Màn hình Thư (Stage 3) ----- */
-        .stage-letter {
-            text-align: center;
-            background-color: #fff8e1;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            max-width: 600px;
-            margin: auto;
-            position: relative;
-        }
-
-        .letter-paper {
-            background-image: url('assets/anhthu.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 30px;
-            border-radius: 10px;
-            min-height: 300px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 5px solid #d4c29c;
-        }
-
-        .letter-content {
-            font-family: 'Times New Roman', serif;
-            font-size: 1.2em;
-            color: #4a2c00;
-            text-align: left;
-            white-space: pre-wrap;
-            opacity: 0;
-            transition: opacity 2s ease 1s; /* Hiện chậm dần */
-        }
-
-        .stage-letter.revealed .letter-content {
-            opacity: 1;
-        }
-
-        .close-button-group {
-            margin-top: 30px;
-        }
+        /* Màn hình Video và Lá Thư (Không thay đổi) */
+        .stage-video { text-align: center; }
+        .video-player { max-width: 800px; width: 100%; height: auto; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); border-radius: 10px; }
+        .video-title { color: #333; margin-bottom: 20px; }
+        .stage-letter { text-align: center; background-color: #fff8e1; padding: 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); max-width: 600px; margin: auto; position: relative; }
+        .letter-paper { background-image: url('assets/anhthu.jpg'); background-size: cover; background-position: center; padding: 30px; border-radius: 10px; min-height: 300px; position: relative; overflow: hidden; box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); border: 5px solid #d4c29c; }
+        .letter-content { font-family: 'Times New Roman', serif; font-size: 1.2em; color: #4a2c00; text-align: left; white-space: pre-wrap; opacity: 0; transition: opacity 2s ease 1s; }
+        .stage-letter.revealed .letter-content { opacity: 1; }
+        .close-button-group { margin-top: 30px; }
 
         /* Animation */
         @keyframes pulse {
@@ -229,7 +201,7 @@
             100% { transform: scale(1); }
         }
         
-        /* Nút Cảm ơn cố định */
+        /* Nút Cảm ơn cố định (SỬA LẠI HIỆN THỊ) */
         .thank-you-btn {
             position: fixed;
             bottom: 20px;
@@ -242,8 +214,18 @@
             text-decoration: none;
             font-weight: bold;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            
+            /* Ẩn mặc định */
+            opacity: 0; 
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
         }
         
+        .thank-you-btn.visible {
+            opacity: 1; /* Hiện khi được kích hoạt bằng JS */
+            pointer-events: auto;
+        }
+
         .thank-you-btn:hover {
             background-color: #0056b3;
         }
@@ -255,12 +237,13 @@
     <div id="stage-1" class="stage stage-1">
         <div class="container">
             <div class="gift-box" id="gift-box">
-                <div class="gift-lid" id="gift-lid"></div>
-                <div class="gift-body"></div>
+                <div class="gift-wrapper"> <div class="gift-lid" id="gift-lid"></div>
+                    <div class="gift-body"></div>
 
-                <div class="content-cat" id="content-cat">
-                    <img src="assets/anhconmeo.jpg" alt="Mèo tặng hoa" class="cat-image">
-                    <p class="message-1">Mừng ngày Phụ nữ Việt Nam 20/10! Chúc bạn luôn xinh đẹp, hạnh phúc và thành công! 🌹</p>
+                    <div class="content-cat" id="content-cat">
+                        <img src="assets/anhconmeo.jpg" alt="Mèo tặng hoa" class="cat-image">
+                        <p class="message-1">Mừng ngày Phụ nữ Việt Nam 20/10! Chúc bạn luôn xinh đẹp, hạnh phúc và thành công! 🌹</p>
+                    </div>
                 </div>
 
                 <button id="open-gift-btn" class="start-button">Mở Quà</button>
@@ -299,7 +282,6 @@
                 Chúc bạn được thật nhiều quà,thật nhiều hạnh phúc,
                 nhiều sức khoẻ ,mãi mãi xinh đẹp nhé! 💐🌷
                 
-              l
             </p>
         </div>
         <div class="close-button-group">
@@ -307,8 +289,8 @@
         </div>
     </div>
     
-    <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn">
-        Cảm ơn người tặng
+    <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn" id="thank-you-btn">
+        Cảm ơn người tặng 😊
     </a>
 
     <script>
@@ -316,14 +298,12 @@
         
         const openGiftBtn = document.getElementById('open-gift-btn');
         const giftBox = document.getElementById('gift-box');
-        const contentCat = document.getElementById('content-cat');
-        const buttonGroup1 = document.getElementById('button-group-1');
+        const thankYouBtn = document.getElementById('thank-you-btn'); // Lấy nút Cảm ơn
         
         const stage1 = document.getElementById('stage-1');
         const stage2 = document.getElementById('stage-2');
         const stage3 = document.getElementById('stage-3');
         const videoPlayer = document.getElementById('video-player');
-        const letterContent = document.getElementById('letter-content');
         const stageLetter = document.getElementById('stage-3');
 
         // 1. Mở Hộp Quà
@@ -331,50 +311,42 @@
             giftBox.classList.add('open');
             openGiftBtn.style.display = 'none'; // Ẩn nút "Mở Quà"
             
-            // Hiện nội dung mèo và nút tương tác sau khi nắp hộp mở
+            // Hiện nút Cảm ơn sau 2.5 giây (để đảm bảo ảnh mèo và nút tương tác đã hiện)
             setTimeout(() => {
-                // Nội dung mèo hiện nhờ CSS transition (1s sau khi mở)
-                // Các nút hiện nhờ CSS transition (2s sau khi mở)
-            }, 100); 
+                thankYouBtn.classList.add('visible'); // Kích hoạt nút Cảm ơn
+            }, 2500); 
         });
 
         // 2. Chuyển sang Stage Video
         function showVideoStage() {
             stage1.style.display = 'none';
             stage2.style.display = 'flex';
-            document.body.style.backgroundColor = '#e0f7fa'; // Thay đổi màu nền
-            videoPlayer.load(); // Tải lại video nếu đã xem trước đó
-            // Tự động phát video (có thể không hoạt động do chính sách trình duyệt)
-            // videoPlayer.play().catch(e => console.log("Video Play Error:", e));
+            document.body.style.backgroundColor = '#e0f7fa';
+            videoPlayer.load();
+            videoPlayer.play().catch(e => console.log("Video Play Error:", e));
         }
 
         // 3. Chuyển sang Stage Lá Thư
         function showLetterStage() {
             stage1.style.display = 'none';
             stage3.style.display = 'flex';
-            document.body.style.backgroundColor = '#fbe9e7'; // Thay đổi màu nền
+            document.body.style.backgroundColor = '#fbe9e7';
             
-            // Hiệu ứng mở thư (hiện lời chúc dần dần)
             stageLetter.classList.add('revealed');
         }
         
         // 4. Đóng Stage và quay lại Stage Hộp Quà
         function closeStage() {
-            // Dừng video nếu đang chạy
             videoPlayer.pause();
             
-            // Ẩn tất cả các stage, hiện stage 1
             stage2.style.display = 'none';
             stage3.style.display = 'none';
             stage1.style.display = 'flex';
             
-            // Đặt lại trạng thái màn hình 1 (nếu cần)
             document.body.style.backgroundColor = '#f7f7f7';
 
-            // Xóa hiệu ứng mở thư
             stageLetter.classList.remove('revealed');
-
-            // Giữ nguyên trạng thái hộp quà đã mở để không phải ấn lại
+            // Nút Cảm ơn vẫn hiện vì hộp quà đã mở.
         }
         
     </script>
