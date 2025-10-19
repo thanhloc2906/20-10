@@ -40,7 +40,229 @@
 
         .gift-box {
             position: relative;
- làmm</a>
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gift-lid {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 350px;
+            height: 140px;
+            background-image: url('assets/naphop.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 2;
+            transform-origin: bottom center;
+            transition: transform 1s cubic-bezier(0.68,-0.55,0.265,1.55);
+        }
+
+        .gift-body {
+            width: 320px;
+            height: 220px;
+            background-image: url('assets/thanhop.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-top: 70px;
+        }
+
+        .gift-box.open .gift-lid {
+            transform: translateX(-50%) translateY(-250px) rotate(-30deg);
+        }
+
+        /* ========== NỘI DUNG TRONG HỘP ========== */
+        .content-cat {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1s ease 1s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .gift-box.open .content-cat {
+            opacity: 1;
+        }
+
+        .cat-image {
+            max-width: 250px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .message-1 {
+            margin-top: 15px;
+            font-size: 1.5em;
+            color: #ff6f00;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ========== NÚT DƯỚI ẢNH MÈO ========== */
+        .button-group {
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.8s ease 1.5s;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .gift-box.open .button-group {
+            opacity: 1;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-primary { background-color: #ff6f00; color: white; }
+        .btn-secondary { background-color: #ffd54f; color: #333; }
+        button:hover { transform: translateY(-2px); }
+
+        /* ========== CÁC STAGE SAU ========== */
+        .stage-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 0;
+            padding-top: 50px;
+            animation: fadeIn 1s ease forwards;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .video-player {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+            margin-top: 10px;
+        }
+
+        .letter {
+            background: #fff8e1;
+            border: 4px solid #d4b36c;
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            text-align: left;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1em;
+            color: #4a2c00;
+            white-space: pre-wrap;
+            opacity: 0;
+            transition: opacity 2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .letter.show { opacity: 1; }
+
+        .letter-header-img {
+            width: 200px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .thank-you-btn {
+            display: none;
+            margin-top: 30px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.2s;
+        }
+
+        /* Nút mở quà ban đầu */
+        .start-button {
+            position: fixed;
+            bottom: 40px;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            background-color: #ff6f00;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="main-container">
+
+    <div class="gift-box-wrapper" id="gift-box-wrapper">
+        <div class="gift-box" id="gift-box">
+            <div class="gift-lid"></div>
+            <div class="gift-body"></div>
+
+            <div class="content-cat" id="content-cat">
+                <img src="assets/anhconmeo.jpg" class="cat-image" alt="Mèo">
+                <p class="message-1">Mừng ngày Phụ nữ Việt Nam 20/10!<br>Chúc bạn luôn xinh đẹp, hạnh phúc và thành công! 🌹</p>
+
+                <!-- Di chuyển 2 nút vào đây -->
+                <div class="button-group" id="button-group">
+                    <button class="btn-secondary" id="btn-more">CÒN GÌ NỮA KHÔNG?</button>
+                    <button class="btn-primary" id="btn-letter">TIẾP TỤC</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="video-section" class="stage-content">
+        <h2 style="color:#ffd54f;">CÒN CHỨ! 😄</h2>
+        <video id="video-player" class="video-player" controls>
+            <source src="assets/video.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ thẻ video.
+        </video>
+        <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn" id="thank1">Cảm ơn người làm 💙</a>
+    </div>
+
+    <div id="letter-section" class="stage-content">
+        <img src="assets/anhthu.jpg" class="letter-header-img" alt="Ảnh trang trí">
+        <div class="letter" id="letter">
+            <h2>💌 Lá thư đặc biệt</h2>
+            Hôm nay là ngày 20/10, ngày tôn vinh một nửa thế giới. 
+            
+            Chúc bạn một ngày thật ý nghĩa, tràn ngập tiếng cười 
+            và nhận được thật nhiều hoa cùng quà 🎁 
+
+            Điều quan trọng nhất: Hãy luôn yêu thương bản thân, 
+            tự tin và rạng rỡ như đóa hoa đang nở rộ 💐
+            
+            P/S: Người tạo món quà này rất quý mến bạn! ❤️
+        </div>
+        <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn" id="thank2">Cảm ơn người làm 💙</a>
     </div>
 </div>
 
