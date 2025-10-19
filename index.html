@@ -12,9 +12,9 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      background-color: #111;
+      background-color: #0f0a1f;
       font-family: "Arial", sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       transition: background-color 0.5s;
     }
 
@@ -50,7 +50,7 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 360px; /* to hơn một chút */
+      width: 360px;
       height: 150px;
       background-image: url("assets/naphop.png");
       background-size: contain;
@@ -62,8 +62,8 @@
     }
 
     .gift-body {
-      width: 340px;
-      height: 230px;
+      width: 330px;
+      height: 220px;
       background-image: url("assets/thanhop.png");
       background-size: contain;
       background-repeat: no-repeat;
@@ -107,7 +107,7 @@
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
+      0%,100% { transform: scale(1); }
       50% { transform: scale(1.05); }
     }
 
@@ -119,6 +119,7 @@
       display: flex;
       justify-content: center;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     .gift-box.open .button-group {
@@ -147,15 +148,14 @@
       transform: translateY(-2px);
     }
 
-    /* ========== STAGE SAU ========== */
+    /* ========== CÁC STAGE SAU ========== */
     .stage-content {
       display: none;
       flex-direction: column;
       align-items: center;
-      margin-top: 0;
-      padding-top: 50px;
+      padding: 30px 10px;
       animation: fadeIn 1s ease forwards;
-      width: 90%;
+      width: 100%;
       max-width: 600px;
     }
 
@@ -172,81 +172,48 @@
       margin-top: 10px;
     }
 
-    /* ========== LÁ THƯ ========== */
+    /* ========== THƯ ========== */
     .letter-wrapper {
-      background: linear-gradient(145deg, #fffaf0, #fff5e6);
+      background: radial-gradient(circle at top left, #fffaf0, #ffebcd);
       border: 3px solid #e2b964;
       border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 0 30px rgba(255, 220, 130, 0.4);
+      padding: 35px 25px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
       width: 100%;
-      max-width: 600px;
       text-align: left;
       position: relative;
       animation: fadeIn 1.5s ease forwards;
-      overflow: hidden;
-    }
-
-    .letter-wrapper::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(255, 255, 255, 0.4), rgba(255,255,255,0)),
-                  linear-gradient(60deg, rgba(255,255,255,0.2), transparent);
-      mix-blend-mode: overlay;
-      animation: sparkle 3s linear infinite;
-    }
-
-    @keyframes sparkle {
-      from { background-position: 0 0; }
-      to { background-position: 300% 300%; }
     }
 
     .letter-title {
       text-align: center;
-      font-size: 2em;
+      font-size: 1.8em;
       font-weight: bold;
       color: #b85c00;
-      text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
-      animation: heartbeat 1.5s infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      text-shadow: 0 0 8px rgba(255, 153, 0, 0.4);
     }
 
     .letter {
       color: #4a2c00;
       font-family: "Georgia", serif;
-      font-size: 1.2em;
+      font-size: 1.1em;
       line-height: 1.8;
+      margin-top: 15px;
       white-space: pre-line;
-      opacity: 0;
-      animation: typing 4s steps(60, end) forwards;
-    }
-
-    @keyframes typing {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .thank-you-btn {
-      display: inline-block; /* Luôn hiển thị */
-      margin-top: 30px;
+      display: block;
+      margin: 25px auto 0;
       background: linear-gradient(45deg, #00c6ff, #0072ff);
       color: white;
-      padding: 10px 20px;
+      padding: 12px 25px;
       border-radius: 25px;
       text-decoration: none;
       font-weight: bold;
+      text-align: center;
+      width: fit-content;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .thank-you-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
     }
 
     /* ========== HOA & KIM TUYẾN RƠI ========== */
@@ -288,8 +255,8 @@
         <div class="content-cat" id="content-cat">
           <img src="assets/anhconmeo.jpg" class="cat-image" alt="Mèo" />
           <p class="message-1">
-            Mừng ngày Phụ nữ Việt Nam 20/10!<br />
-            Chúc bạn luôn xinh đẹp, hạnh phúc và thành công! 🌹
+            Mừng ngày Phụ nữ Việt Nam 20/10!<br />Chúc bạn luôn xinh đẹp, hạnh
+            phúc và thành công! 🌹
           </p>
 
           <div class="button-group" id="button-group">
@@ -301,18 +268,17 @@
     </div>
 
     <div id="video-section" class="stage-content">
-      <h2 style="color: #ffd54f">CÒN CHỨ! </h2>
+      <h2 style="color: #ffd54f">CÒN CHỨ! 😄</h2>
       <video id="video-player" class="video-player" controls>
         <source src="assets/video.mp4" type="video/mp4" />
-        Trình duyệt của bạn không hỗ trợ video.
       </video>
-      <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn">Cảm ơn người làm 💙</a>
+      <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn" id="thank1">Cảm ơn người làm 💙</a>
     </div>
 
     <div id="letter-section" class="stage-content">
       <div class="letter-wrapper">
         <h2 class="letter-title">💌 Lá thư đặc biệt</h2>
-        <div class="letter">
+        <div class="letter" id="letter">
           Hôm nay là ngày 20/10, ngày tôn vinh một nửa thế giới.
 
           Chúc bạn một ngày thật ý nghĩa, tràn ngập tiếng cười và nhận được thật nhiều hoa cùng quà 🎁
@@ -321,7 +287,7 @@
 
           P/S: Người tạo món quà này rất quý mến bạn! ❤️
         </div>
-        <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn">Cảm ơn người làm 💙</a>
+        <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn" id="thank2">Cảm ơn người làm 💙</a>
       </div>
     </div>
   </div>
@@ -337,12 +303,12 @@
     const btnMore = document.getElementById("btn-more");
     const btnLetter = document.getElementById("btn-letter");
 
-    function showExtraContent(section) {
+    function showExtraContent(contentElement) {
       giftBoxWrapper.classList.add("hidden");
       openGiftBtn.style.display = "none";
       videoSection.style.display = "none";
       letterSection.style.display = "none";
-      section.style.display = "flex";
+      contentElement.style.display = "flex";
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -353,17 +319,20 @@
 
     btnMore.addEventListener("click", () => {
       showExtraContent(videoSection);
-      document.getElementById("video-player").load();
+      document.getElementById("thank1").style.display = "block";
+      const videoPlayer = document.getElementById("video-player");
+      videoPlayer.load();
     });
 
     btnLetter.addEventListener("click", () => {
       showExtraContent(letterSection);
-      createFallingEffectOnce();
+      document.getElementById("thank2").style.display = "block";
+      createFallingEffect();
     });
 
-    /* ========== HOA & KIM TUYẾN RƠI 1 LẦN ========== */
+    /* ========== HOA & KIM TUYẾN RƠI (1 lần) ========== */
     let hasFallen = false;
-    function createFallingEffectOnce() {
+    function createFallingEffect() {
       if (hasFallen) return;
       hasFallen = true;
       const emojis = ["🌸", "💖", "✨", "🌹", "💐"];
@@ -373,7 +342,7 @@
         elem.textContent = emojis[Math.floor(Math.random() * emojis.length)];
         elem.style.left = Math.random() * 100 + "vw";
         elem.style.fontSize = Math.random() * 24 + 14 + "px";
-        elem.style.animationDuration = 6 + Math.random() * 5 + "s";
+        elem.style.animationDuration = 6 + Math.random() * 4 + "s";
         document.body.appendChild(elem);
         setTimeout(() => elem.remove(), 9000);
       }
