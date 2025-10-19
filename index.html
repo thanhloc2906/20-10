@@ -50,8 +50,8 @@
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 350px;
-      height: 140px;
+      width: 360px; /* to hơn một chút */
+      height: 150px;
       background-image: url("assets/naphop.png");
       background-size: contain;
       background-repeat: no-repeat;
@@ -62,8 +62,8 @@
     }
 
     .gift-body {
-      width: 320px;
-      height: 220px;
+      width: 340px;
+      height: 230px;
       background-image: url("assets/thanhop.png");
       background-size: contain;
       background-repeat: no-repeat;
@@ -107,13 +107,8 @@
     }
 
     @keyframes pulse {
-      0%,
-      100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     /* ========== NÚT DƯỚI ẢNH MÈO ========== */
@@ -152,7 +147,7 @@
       transform: translateY(-2px);
     }
 
-    /* ========== CÁC STAGE SAU ========== */
+    /* ========== STAGE SAU ========== */
     .stage-content {
       display: none;
       flex-direction: column;
@@ -165,14 +160,8 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .video-player {
@@ -183,13 +172,13 @@
       margin-top: 10px;
     }
 
-    /* ========== THƯ ĐẸP LUNG LINH ========== */
+    /* ========== LÁ THƯ ========== */
     .letter-wrapper {
-      background: linear-gradient(145deg, #fff8dc, #ffefd5);
+      background: linear-gradient(145deg, #fffaf0, #fff5e6);
       border: 3px solid #e2b964;
       border-radius: 20px;
       padding: 40px;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+      box-shadow: 0 0 30px rgba(255, 220, 130, 0.4);
       width: 100%;
       max-width: 600px;
       text-align: left;
@@ -202,23 +191,15 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-          120deg,
-          rgba(255, 255, 255, 0.4),
-          rgba(255, 255, 255, 0)
-        ),
-        linear-gradient(60deg, rgba(255, 255, 255, 0.3), transparent);
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.4), rgba(255,255,255,0)),
+                  linear-gradient(60deg, rgba(255,255,255,0.2), transparent);
       mix-blend-mode: overlay;
       animation: sparkle 3s linear infinite;
     }
 
     @keyframes sparkle {
-      from {
-        background-position: 0 0;
-      }
-      to {
-        background-position: 300% 300%;
-      }
+      from { background-position: 0 0; }
+      to { background-position: 300% 300%; }
     }
 
     .letter-title {
@@ -231,13 +212,8 @@
     }
 
     @keyframes heartbeat {
-      0%,
-      100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .letter {
@@ -251,18 +227,12 @@
     }
 
     @keyframes typing {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .thank-you-btn {
-      display: none;
+      display: inline-block; /* Luôn hiển thị */
       margin-top: 30px;
       background: linear-gradient(45deg, #00c6ff, #0072ff);
       color: white;
@@ -273,6 +243,7 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s, box-shadow 0.2s;
     }
+
     .thank-you-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
@@ -283,22 +254,16 @@
       position: fixed;
       top: -10px;
       z-index: 0;
-      animation: fall 8s linear infinite;
+      animation: fall 8s linear forwards;
       pointer-events: none;
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0.5;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Nút mở quà ban đầu */
+    /* ========== NÚT MỞ QUÀ ========== */
     .start-button {
       position: fixed;
       bottom: 40px;
@@ -323,14 +288,12 @@
         <div class="content-cat" id="content-cat">
           <img src="assets/anhconmeo.jpg" class="cat-image" alt="Mèo" />
           <p class="message-1">
-            Mừng ngày Phụ nữ Việt Nam 20/10!<br />Chúc bạn luôn xinh đẹp, hạnh
-            phúc và thành công! 🌹
+            Mừng ngày Phụ nữ Việt Nam 20/10!<br />
+            Chúc bạn luôn xinh đẹp, hạnh phúc và thành công! 🌹
           </p>
 
           <div class="button-group" id="button-group">
-            <button class="btn-secondary" id="btn-more">
-              CÒN GÌ NỮA KHÔNG?
-            </button>
+            <button class="btn-secondary" id="btn-more">CÒN GÌ NỮA KHÔNG?</button>
             <button class="btn-primary" id="btn-letter">TIẾP TỤC</button>
           </div>
         </div>
@@ -338,41 +301,27 @@
     </div>
 
     <div id="video-section" class="stage-content">
-      <h2 style="color: #ffd54f">CÒN CHỨ! 😄</h2>
+      <h2 style="color: #ffd54f">CÒN CHỨ! </h2>
       <video id="video-player" class="video-player" controls>
         <source src="assets/video.mp4" type="video/mp4" />
-        Trình duyệt của bạn không hỗ trợ thẻ video.
+        Trình duyệt của bạn không hỗ trợ video.
       </video>
-      <a
-        href="http://m.me/thanhloc2906208"
-        target="_blank"
-        class="thank-you-btn"
-        id="thank1"
-        >Cảm ơn người làm 💙</a
-      >
+      <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn">Cảm ơn người làm 💙</a>
     </div>
 
     <div id="letter-section" class="stage-content">
       <div class="letter-wrapper">
         <h2 class="letter-title">💌 Lá thư đặc biệt</h2>
-        <div class="letter" id="letter">
+        <div class="letter">
           Hôm nay là ngày 20/10, ngày tôn vinh một nửa thế giới.
 
-          Chúc bạn một ngày thật ý nghĩa, tràn ngập tiếng cười và nhận được thật
-          nhiều hoa cùng quà 🎁
+          Chúc bạn một ngày thật ý nghĩa, tràn ngập tiếng cười và nhận được thật nhiều hoa cùng quà 🎁
 
-          Điều quan trọng nhất: Hãy luôn yêu thương bản thân, tự tin và rạng rỡ
-          như đóa hoa đang nở rộ 💐
+          Điều quan trọng nhất: Hãy luôn yêu thương bản thân, tự tin và rạng rỡ như đóa hoa đang nở rộ 💐
 
           P/S: Người tạo món quà này rất quý mến bạn! ❤️
         </div>
-        <a
-          href="http://m.me/thanhloc2906208"
-          target="_blank"
-          class="thank-you-btn"
-          id="thank2"
-          >Cảm ơn người làm 💙</a
-        >
+        <a href="http://m.me/thanhloc2906208" target="_blank" class="thank-you-btn">Cảm ơn người làm 💙</a>
       </div>
     </div>
   </div>
@@ -387,14 +336,13 @@
     const letterSection = document.getElementById("letter-section");
     const btnMore = document.getElementById("btn-more");
     const btnLetter = document.getElementById("btn-letter");
-    const letter = document.getElementById("letter");
 
-    function showExtraContent(contentElement) {
+    function showExtraContent(section) {
       giftBoxWrapper.classList.add("hidden");
       openGiftBtn.style.display = "none";
       videoSection.style.display = "none";
       letterSection.style.display = "none";
-      contentElement.style.display = "flex";
+      section.style.display = "flex";
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -405,23 +353,21 @@
 
     btnMore.addEventListener("click", () => {
       showExtraContent(videoSection);
-      document.getElementById("thank1").style.display = "inline-block";
-      const videoPlayer = document.getElementById("video-player");
-      videoPlayer.load();
+      document.getElementById("video-player").load();
     });
 
     btnLetter.addEventListener("click", () => {
       showExtraContent(letterSection);
-      document.getElementById("thank2").style.display = "inline-block";
-      letter.classList.remove("show");
-      setTimeout(() => letter.classList.add("show"), 500);
-      createFallingEffect();
+      createFallingEffectOnce();
     });
 
-    /* ========== HOA & KIM TUYẾN RƠI ========== */
-    function createFallingEffect() {
+    /* ========== HOA & KIM TUYẾN RƠI 1 LẦN ========== */
+    let hasFallen = false;
+    function createFallingEffectOnce() {
+      if (hasFallen) return;
+      hasFallen = true;
       const emojis = ["🌸", "💖", "✨", "🌹", "💐"];
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 40; i++) {
         const elem = document.createElement("div");
         elem.classList.add("falling");
         elem.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -429,7 +375,7 @@
         elem.style.fontSize = Math.random() * 24 + 14 + "px";
         elem.style.animationDuration = 6 + Math.random() * 5 + "s";
         document.body.appendChild(elem);
-        setTimeout(() => elem.remove(), 10000);
+        setTimeout(() => elem.remove(), 9000);
       }
     }
   </script>
