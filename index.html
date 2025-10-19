@@ -35,7 +35,23 @@
     .gift-box-wrapper.hidden {
       opacity: 0;
       pointer-events: none;
-      posi130px;
+      position: absolute;
+    }
+
+    .gift-box {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gift-lid {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 370px;
+      height: 140px;
       background-image: url("assets/naphop.png");
       background-size: contain;
       background-repeat: no-repeat;
